@@ -26,15 +26,14 @@ public class CountryService {
         return countryList;
     }
 
-    public String getCountryById(Long id){
+    public String getCountryById(int id){
+        Country country=countryRepository.findBy(id);
+        if (country!=null){
+            return country.getCountry();
+        }else {
+            return null;
+        }
 
-            Optional<Country> country =countryRepository.findById( id);
-            if (country.isPresent()){
-               return country.get().getCountry();
-            }
-            else {
-                return null;
-            }
 
     }
 }

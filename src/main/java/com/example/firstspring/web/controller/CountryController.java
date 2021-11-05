@@ -29,7 +29,7 @@ public class CountryController {
     }
 
     @GetMapping("/get/{id}")
-    public String getCountryByIndex(@PathVariable Long id){
+    public String getCountryByIndex(@PathVariable int id){
         return serviceBetweenWebAndBack.getCountryById(id);
     }
 }

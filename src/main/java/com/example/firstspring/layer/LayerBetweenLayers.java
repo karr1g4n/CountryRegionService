@@ -25,7 +25,7 @@ public class LayerBetweenLayers {
         return countryService.getAllCountry();
     }
 
-    public String getCountryById(Long id){
+    public String getCountryById(int id){
         return countryService.getCountryById(id);
     }
 }
