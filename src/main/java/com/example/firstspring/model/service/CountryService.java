@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 public class CountryService {
-    private  CountryRepository countryRepository;
+    private final  CountryRepository countryRepository;
 
     @Autowired
     public CountryService(CountryRepository countryRepository){
@@ -26,7 +26,8 @@ public class CountryService {
         return countryList;
     }
 
-    public String getCountryByIndex(Long id){
+    public String getCountryById(Long id){
+
             Optional<Country> country =countryRepository.findById( id);
             if (country.isPresent()){
                return country.get().getCountry();

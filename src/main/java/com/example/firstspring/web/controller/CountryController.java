@@ -1,9 +1,8 @@
 package com.example.firstspring.web.controller;
 
+import com.example.firstspring.layer.LayerBetweenLayers;
 import com.example.firstspring.model.entity.Country;
-import com.example.firstspring.model.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,27 +11,25 @@ import java.util.List;
 @RequestMapping("/country")
 public class CountryController {
 
-
-    private CountryService countryService ;
+    private final  LayerBetweenLayers serviceBetweenWebAndBack ;
 
     @Autowired
-    private CountryController(CountryService countryService){
-        this.countryService=countryService;
+    private CountryController(LayerBetweenLayers serviceBetweenWebAndBack){
+        this.serviceBetweenWebAndBack=serviceBetweenWebAndBack;
     }
 
     @PostMapping("/add")
     public Country addCountry(@RequestBody Country country){
-        return countryService.addCountry(country);
+        return serviceBetweenWebAndBack.addCountry(country);
     }
 
     @GetMapping("/getAllCountry")
     public List<Country> geAllCountry(){
-        return countryService.getAllCountry();
+        return serviceBetweenWebAndBack.getAllCountry();
     }
 
     @GetMapping("/get/{id}")
     public String getCountryByIndex(@PathVariable Long id){
-
-        return countryService.getCountryByIndex(id);
+        return serviceBetweenWebAndBack.getCountryById(id);
     }
 }
