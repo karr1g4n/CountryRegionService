@@ -11,15 +11,11 @@ import java.util.List;
 public class WorkWithCountryRegionService {
     private CountryRegionRepository countryRegionRepository;
 
-    private  WorkWithGeoLite2Country workWithGeoLite2Country;
-//
-//    private CountryRegionGetByNameRepository countryRegionGetByNameRepository;
 
     @Autowired
-    private WorkWithCountryRegionService(CountryRegionRepository countryRegionRepository,WorkWithGeoLite2Country workWithGeoLite2Country){
-        this.workWithGeoLite2Country=workWithGeoLite2Country;
+    private WorkWithCountryRegionService(CountryRegionRepository countryRegionRepository){
         this.countryRegionRepository=countryRegionRepository;
-//        this.countryRegionGetByNameRepository=countryRegionGetByNameRepository;
+
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion){
@@ -34,9 +30,4 @@ public class WorkWithCountryRegionService {
         countryRegionRepository.deleteById(id);
     }
 
-    public String getRegionByIp(String ip){
-
-      String nameOfCountry= workWithGeoLite2Country.getNameOfCountry(ip);
-        return nameOfCountry;
-    }
 }

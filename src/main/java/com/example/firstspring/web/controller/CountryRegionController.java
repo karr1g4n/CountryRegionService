@@ -1,9 +1,8 @@
 package com.example.firstspring.web.controller;
 
+//import com.example.firstspring.feign.CountryRegionClient;
 import com.example.firstspring.model.entity.CountryRegion;
-//import com.example.firstspring.service.FirstService;
 import com.example.firstspring.service.WorkWithCountryRegionService;
-import com.example.firstspring.service.WorkWithGeoLite2Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +15,12 @@ public class CountryRegionController {
 
     private WorkWithCountryRegionService workWithCountryRegionService;
 
-    private RegionController regionController;
+
 
     @Autowired
-    private CountryRegionController(WorkWithCountryRegionService workWithCountryRegionService,RegionController regionController) {
+    private CountryRegionController(WorkWithCountryRegionService workWithCountryRegionService) {
         this.workWithCountryRegionService = workWithCountryRegionService;
-        this.regionController=regionController;
+
     }
 
     @PostMapping("/addCountryRegion")
@@ -39,10 +38,7 @@ public class CountryRegionController {
         workWithCountryRegionService.del(id);
     }
 
-//    @PostMapping("/getRegionByIp")
-//    public String getRegionByIp(@RequestParam String ip){
-//
-//    }
+
 }
 
 
