@@ -1,0 +1,6 @@
+com\example\firstspring\model\entity\CountryRegion.class
+com\example\firstspring\feign\CountryRegionClient.class
+com\example\firstspring\service\WorkWithCountryRegionService.class
+com\example\firstspring\web\controller\CountryRegionController.class
+com\example\firstspring\FirstSpringApplication.class
+com\example\firstspring\repository\CountryRegionRepository.class

@@ -1,0 +1,6 @@
+D:\MicroServiceCountryRegion\src\main\java\com\example\firstspring\FirstSpringApplication.java
+D:\MicroServiceCountryRegion\src\main\java\com\example\firstspring\repository\CountryRegionRepository.java
+D:\MicroServiceCountryRegion\src\main\java\com\example\firstspring\model\entity\CountryRegion.java
+D:\MicroServiceCountryRegion\src\main\java\com\example\firstspring\web\controller\CountryRegionController.java
+D:\MicroServiceCountryRegion\src\main\java\com\example\firstspring\feign\CountryRegionClient.java
+D:\MicroServiceCountryRegion\src\main\java\com\example\firstspring\service\WorkWithCountryRegionService.java
