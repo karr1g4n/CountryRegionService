@@ -17,7 +17,7 @@ public class ConnectionWithGeoLite2CountryController {
 
     @GetMapping("/getRegionByIp")
     public String get(@RequestParam String ip){
-       return countyFeignService.getCountryName(ip);
+       return countyFeignService.getRegionName(ip);
 
     }
 }

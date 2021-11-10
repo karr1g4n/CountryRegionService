@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class WorkWithCountryRegionService {
+public class CountryRegionService {
     private final CountryRegionRepository countryRegionRepository;
     private CountryRegionGetByNameRepository countryRegionGetByNameRepository;
 
     @Autowired
-    private WorkWithCountryRegionService(CountryRegionRepository countryRegionRepository,CountryRegionGetByNameRepository countryRegionGetByNameRepository){
+    private CountryRegionService(CountryRegionRepository countryRegionRepository, CountryRegionGetByNameRepository countryRegionGetByNameRepository){
 
         this.countryRegionRepository=countryRegionRepository;
         this.countryRegionGetByNameRepository=countryRegionGetByNameRepository;

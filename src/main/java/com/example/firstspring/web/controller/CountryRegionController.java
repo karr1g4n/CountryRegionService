@@ -2,7 +2,7 @@ package com.example.firstspring.web.controller;
 
 //import com.example.firstspring.feign.CountryRegionClient;
 import com.example.firstspring.model.entity.CountryRegion;
-import com.example.firstspring.service.WorkWithCountryRegionService;
+import com.example.firstspring.service.CountryRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,32 +13,32 @@ import java.util.List;
 @RequestMapping("/countryRegion")
 public class CountryRegionController {
 
-    private WorkWithCountryRegionService workWithCountryRegionService;
+    private CountryRegionService countryRegionService;
 
     @Autowired
-    private CountryRegionController(WorkWithCountryRegionService workWithCountryRegionService) {
-        this.workWithCountryRegionService = workWithCountryRegionService;
+    private CountryRegionController(CountryRegionService countryRegionService) {
+        this.countryRegionService = countryRegionService;
 
     }
 
     @PostMapping("/addCountryRegion")
     public CountryRegion addCountryRegion(@RequestBody CountryRegion countryRegion){
-        return workWithCountryRegionService.addCountryRegion(countryRegion);
+        return countryRegionService.addCountryRegion(countryRegion);
     }
 
     @GetMapping("/updateCountryRegion")
     public CountryRegion updateCountryRegion(@RequestBody CountryRegion countryRegion){
-        return workWithCountryRegionService.updateCountryRegion(countryRegion);
+        return countryRegionService.updateCountryRegion(countryRegion);
     }
 
     @GetMapping("/getAllCountryRegion")
     public List<CountryRegion> getAllCountryRegion(){
-        return workWithCountryRegionService.getAllCountryRegion();
+        return countryRegionService.getAllCountryRegion();
     }
 
     @PostMapping("/del/{id}")
     public void del(@PathVariable int id){
-        workWithCountryRegionService.deleteCountryRegion(id);
+        countryRegionService.deleteCountryRegion(id);
     }
 
 
