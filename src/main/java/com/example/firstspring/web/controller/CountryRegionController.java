@@ -15,8 +15,6 @@ public class CountryRegionController {
 
     private WorkWithCountryRegionService workWithCountryRegionService;
 
-
-
     @Autowired
     private CountryRegionController(WorkWithCountryRegionService workWithCountryRegionService) {
         this.workWithCountryRegionService = workWithCountryRegionService;
@@ -28,6 +26,11 @@ public class CountryRegionController {
         return workWithCountryRegionService.addCountryRegion(countryRegion);
     }
 
+    @GetMapping("/updateCountryRegion")
+    public CountryRegion updateCountryRegion(@RequestBody CountryRegion countryRegion){
+        return workWithCountryRegionService.updateCountryRegion(countryRegion);
+    }
+
     @GetMapping("/getAllCountryRegion")
     public List<CountryRegion> getAllCountryRegion(){
         return workWithCountryRegionService.getAllCountryRegion();
@@ -35,7 +38,7 @@ public class CountryRegionController {
 
     @PostMapping("/del/{id}")
     public void del(@PathVariable int id){
-        workWithCountryRegionService.del(id);
+        workWithCountryRegionService.deleteCountryRegion(id);
     }
 
 
