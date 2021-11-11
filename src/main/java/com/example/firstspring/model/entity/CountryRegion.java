@@ -1,5 +1,6 @@
 package com.example.firstspring.model.entity;
 
+import com.opencsv.bean.CsvBindByPosition;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,5 +13,6 @@ public class CountryRegion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String country;
+
     private String region;
 }
