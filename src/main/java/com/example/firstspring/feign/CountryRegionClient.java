@@ -10,8 +10,4 @@ public interface CountryRegionClient {
 
     @GetMapping("/getCountryByIp")
     String getCountryName(@RequestParam String ip);
-
-
-    @GetMapping("/getRegionByIp")
-    String getRegionName(@RequestParam String ip);
 }
