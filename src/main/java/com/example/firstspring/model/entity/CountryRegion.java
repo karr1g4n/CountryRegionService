@@ -1,12 +1,16 @@
 package com.example.firstspring.model.entity;
 
-import com.opencsv.bean.CsvBindByPosition;
+
 import lombok.*;
 
 import javax.persistence.*;
 
 
-@Data
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "country_region")
 public class CountryRegion {
     @Id
@@ -15,4 +19,9 @@ public class CountryRegion {
     private String country;
 
     private String region;
+
+    public CountryRegion(String countyName, String region) {
+        this.country=countyName;
+        this.region=region;
+    }
 }

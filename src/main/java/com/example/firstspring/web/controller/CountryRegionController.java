@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.FaultAction;
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -31,6 +33,12 @@ public class CountryRegionController {
     public CountryRegion updateCountryRegion(@RequestBody CountryRegion countryRegion){
         log.info("User try update country and region in DB");
         return countryRegionService.updateCountryRegion(countryRegion);
+    }
+
+    @GetMapping("/addAll")
+    private void addAllCountryRegion() throws IOException {
+        log.info("User try add all country and region in DB");
+        countryRegionService.addAllCountry();
     }
 
     @GetMapping("/getAll")
