@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-
 public class CountryRegionService {
     private final CountryRegionRepository countryRegionRepository;
     private  final GetAllCountriesFromGeoName getAllCountriesFromGeoName;
@@ -29,14 +28,20 @@ public class CountryRegionService {
     public void addAllCountry() throws IOException {
         List<String> countriesName=getAllCountriesFromGeoName.getCountryNamesFromGeoName();
         for (int i=0;i<countriesName.size();i++){
-           countryRegionRepository.save(new CountryRegion(countriesName.get(i),"world"));
+            if (countryRegionRepository.findFirstByCountry(countriesName.get(i))==null){
+                countryRegionRepository.save(new CountryRegion(countriesName.get(i),"world"));
+            }
         }
     }
 
     public CountryRegion updateCountryRegion(CountryRegion countryRegion){
-      CountryRegion countryRegion1 = countryRegionRepository.findFirstByCountry(countryRegion.getCountry());
-      countryRegion1.setRegion(countryRegion.getRegion());
-      return   countryRegionRepository.save(countryRegion1);
+        CountryRegion countryRegionExisting=countryRegionRepository.findFirstByCountry(countryRegion.getCountry());
+        if (countryRegionExisting !=null){
+            countryRegionExisting.setRegion(countryRegionExisting.getRegion());
+            countryRegionRepository.save(countryRegionExisting);
+            return countryRegionExisting;
+        }
+         return null;
     }
     
     public List<CountryRegion> getAllCountryRegion(){
