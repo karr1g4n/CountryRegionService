@@ -1,9 +1,8 @@
-package com.example.firstspring.web.controller;
+package pragmatTech.countryRegionService.web.controller;
 
-import com.example.firstspring.service.CountyFeignService;
+import pragmatTech.countryRegionService.service.CountyFeignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController

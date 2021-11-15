@@ -1,4 +1,4 @@
-package com.example.firstspring.feign;
+package pragmatTech.countryRegionService.feign;
 
 
 import org.springframework.cloud.openfeign.FeignClient;

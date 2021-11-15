@@ -1,6 +1,6 @@
-package com.example.firstspring.service;
+package pragmatTech.countryRegionService.service;
 
-import com.example.firstspring.feign.CountryRegionClient;
+import pragmatTech.countryRegionService.feign.CountryRegionClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.firstspring;
+package pragmatTech.countryRegionService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,13 +1,12 @@
-package com.example.firstspring.web.controller;
+package pragmatTech.countryRegionService.web.controller;
 
 
-import com.example.firstspring.model.entity.CountryRegion;
-import com.example.firstspring.service.CountryRegionService;
+import pragmatTech.countryRegionService.model.entity.CountryRegion;
+import pragmatTech.countryRegionService.service.CountryRegionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.FaultAction;
 import java.io.IOException;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class CountryRegionController {
         return countryRegionService.updateCountryRegion(countryRegion);
     }
 
-    @GetMapping("/addAll")
+    @PostMapping("/addAll")
     private void addAllCountryRegion() throws IOException {
         log.info("User try add all country and region in DB");
         countryRegionService.addAllCountry();

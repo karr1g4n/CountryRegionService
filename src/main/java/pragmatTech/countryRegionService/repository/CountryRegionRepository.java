@@ -1,10 +1,9 @@
-package com.example.firstspring.repository;
+package pragmatTech.countryRegionService.repository;
 
-import com.example.firstspring.model.entity.CountryRegion;
+import pragmatTech.countryRegionService.model.entity.CountryRegion;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.lang.model.element.Name;
 import java.util.List;
 
 @Repository

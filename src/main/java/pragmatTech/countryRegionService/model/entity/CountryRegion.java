@@ -1,16 +1,10 @@
-package com.example.firstspring.model.entity;
-
-
+package pragmatTech.countryRegionService.model.entity;
 import lombok.*;
-
 import javax.persistence.*;
 
 
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity(name = "country_region")
 public class CountryRegion {
     @Id
@@ -23,5 +17,8 @@ public class CountryRegion {
     public CountryRegion(String countyName, String region) {
         this.country=countyName;
         this.region=region;
+    }
+    public CountryRegion() {
+
     }
 }

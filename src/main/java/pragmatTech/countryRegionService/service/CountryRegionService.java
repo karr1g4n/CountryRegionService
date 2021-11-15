@@ -1,8 +1,8 @@
-package com.example.firstspring.service;
+package pragmatTech.countryRegionService.service;
 
-import com.example.firstspring.OpenCsv.GetAllCountriesFromGeoName;
-import com.example.firstspring.model.entity.CountryRegion;
-import com.example.firstspring.repository.CountryRegionRepository;
+import pragmatTech.countryRegionService.OpenCsv.CountriesGeoNameService;
+import pragmatTech.countryRegionService.model.entity.CountryRegion;
+import pragmatTech.countryRegionService.repository.CountryRegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +12,12 @@ import java.util.List;
 @Service
 public class CountryRegionService {
     private final CountryRegionRepository countryRegionRepository;
-    private  final GetAllCountriesFromGeoName getAllCountriesFromGeoName;
+    private  final CountriesGeoNameService countriesGeoNameService;
 
     @Autowired
-    private CountryRegionService(CountryRegionRepository countryRegionRepository,GetAllCountriesFromGeoName getAllCountriesFromGeoName){
+    private CountryRegionService(CountryRegionRepository countryRegionRepository, CountriesGeoNameService countriesGeoNameService){
         this.countryRegionRepository=countryRegionRepository;
-        this.getAllCountriesFromGeoName=getAllCountriesFromGeoName;
+        this.countriesGeoNameService = countriesGeoNameService;
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion){
@@ -26,7 +26,7 @@ public class CountryRegionService {
 
 
     public void addAllCountry() throws IOException {
-        List<String> countriesName=getAllCountriesFromGeoName.getCountryNamesFromGeoName();
+        List<String> countriesName= countriesGeoNameService.getCountryNamesFromGeoName();
         for (int i=0;i<countriesName.size();i++){
             if (countryRegionRepository.findFirstByCountry(countriesName.get(i))==null){
                 countryRegionRepository.save(new CountryRegion(countriesName.get(i),"world"));

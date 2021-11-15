@@ -1,8 +1,9 @@
-package com.example.firstspring.OpenCsv;
+package pragmatTech.countryRegionService.OpenCsv;
 
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
@@ -13,11 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class GetAllCountriesFromGeoName {
-    String fileName = "D:\\countryInfo\\countryinfo.txt";
+public class CountriesGeoNameService {
+    @Value("${geonames.url}")
+    String fileName;
     Reader fileReader;
     List<String> countryNames = new ArrayList<>();
-    public GetAllCountriesFromGeoName() throws FileNotFoundException {
+    public CountriesGeoNameService() throws FileNotFoundException {
         fileReader = new FileReader(fileName);
     }
 
