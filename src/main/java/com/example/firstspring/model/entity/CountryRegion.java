@@ -1,4 +1,4 @@
-package pragmatTech.countryRegionService.model.entity;
+package com.example.firstspring.model.entity;
 import lombok.*;
 import javax.persistence.*;
 

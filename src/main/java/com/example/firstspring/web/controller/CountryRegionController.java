@@ -1,9 +1,11 @@
-package pragmatTech.countryRegionService.web.controller;
+package com.example.firstspring.web.controller;
 
 
-import pragmatTech.countryRegionService.model.entity.CountryRegion;
-import pragmatTech.countryRegionService.service.CountryRegionService;
+import com.example.firstspring.model.entity.CountryRegion;
+import com.example.firstspring.service.CountryRegionService;
+import com.example.firstspring.service.GeoNameClientService;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +18,12 @@ import java.util.List;
 public class CountryRegionController {
 
     private CountryRegionService countryRegionService;
+    private GeoNameClientService geoNameClientService;
 
     @Autowired
-    private CountryRegionController(CountryRegionService countryRegionService) {
+    private CountryRegionController(CountryRegionService countryRegionService, GeoNameClientService geoNameClientService) {
         this.countryRegionService = countryRegionService;
+        this.geoNameClientService=geoNameClientService;
     }
 
     @PostMapping()
@@ -57,7 +61,6 @@ public class CountryRegionController {
         log.info("request to delete country and region by name of country");
         countryRegionService.deleteCountryRegionByName(name);
     }
-
 
 }
 

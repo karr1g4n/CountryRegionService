@@ -1,6 +1,6 @@
-package pragmatTech.countryRegionService.repository;
+package com.example.firstspring.repository;
 
-import pragmatTech.countryRegionService.model.entity.CountryRegion;
+import com.example.firstspring.model.entity.CountryRegion;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
-package pragmatTech.countryRegionService.service;
+package com.example.firstspring.service;
 
-import pragmatTech.countryRegionService.OpenCsv.CountriesGeoNameService;
-import pragmatTech.countryRegionService.model.entity.CountryRegion;
-import pragmatTech.countryRegionService.repository.CountryRegionRepository;
+
+import com.example.firstspring.model.entity.CountryRegion;
+import com.example.firstspring.repository.CountryRegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +12,12 @@ import java.util.List;
 @Service
 public class CountryRegionService {
     private final CountryRegionRepository countryRegionRepository;
-    private  final CountriesGeoNameService countriesGeoNameService;
 
+    private  GeoNameClientService geoNameClientService;
     @Autowired
-    private CountryRegionService(CountryRegionRepository countryRegionRepository, CountriesGeoNameService countriesGeoNameService){
+    private CountryRegionService(CountryRegionRepository countryRegionRepository,GeoNameClientService geoNameClientService){
         this.countryRegionRepository=countryRegionRepository;
-        this.countriesGeoNameService = countriesGeoNameService;
+        this.geoNameClientService=geoNameClientService;
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion){
@@ -26,7 +26,7 @@ public class CountryRegionService {
 
 
     public void addAllCountry() throws IOException {
-        List<String> countriesName= countriesGeoNameService.getCountryNamesFromGeoName();
+        List<String> countriesName = geoNameClientService.getAllCountries();
         for (int i=0;i<countriesName.size();i++){
             if (countryRegionRepository.findFirstByCountry(countriesName.get(i))==null){
                 countryRegionRepository.save(new CountryRegion(countriesName.get(i),"world"));
@@ -55,6 +55,10 @@ public class CountryRegionService {
     public CountryRegion deleteCountryRegionByName(String name){
        return countryRegionRepository.deleteByCountry(name);
     }
+
+
+
+
 
     public void deleteCountryRegion(int id){
         countryRegionRepository.deleteById(id);
