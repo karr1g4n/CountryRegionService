@@ -1,10 +1,9 @@
 package pragmatTech.CountryRegionService.service;
 
-import pragmatTech.CountryRegionService.feign.GeoNameClient;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pragmatTech.CountryRegionService.feign.GeoNameClient;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -17,7 +16,6 @@ public class GeoNameClientService {
     private GeoNameClient geoNameClient;
     private List<String> countryNames = new ArrayList<>();
 
-    @Autowired
     public GeoNameClientService(GeoNameClient geoNameClient) {
         this.geoNameClient = geoNameClient;
     }

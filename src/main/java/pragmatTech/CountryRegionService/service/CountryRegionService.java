@@ -1,8 +1,8 @@
 package pragmatTech.CountryRegionService.service;
 
+import org.springframework.stereotype.Service;
 import pragmatTech.CountryRegionService.model.entity.CountryRegion;
 import pragmatTech.CountryRegionService.repository.CountryRegionRepository;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +13,6 @@ public class CountryRegionService {
     private final CountryRegionRepository countryRegionRepository;
 
     private GeoNameClientService geoNameClientService;
-
 
     private CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
         this.countryRegionRepository = countryRegionRepository;

@@ -1,8 +1,8 @@
 package pragmatTech.CountryRegionService.repository;
 
-import pragmatTech.CountryRegionService.model.entity.CountryRegion;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import pragmatTech.CountryRegionService.model.entity.CountryRegion;
 
 import java.util.List;
 
