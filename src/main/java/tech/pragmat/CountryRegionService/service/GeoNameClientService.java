@@ -1,9 +1,9 @@
-package pragmatTech.CountryRegionService.service;
+package tech.pragmat.CountryRegionService.service;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
-import pragmatTech.CountryRegionService.feign.GeoNameClient;
+import tech.pragmat.CountryRegionService.feign.GeoNameClient;
 
 import java.io.IOException;
 import java.io.StringReader;
