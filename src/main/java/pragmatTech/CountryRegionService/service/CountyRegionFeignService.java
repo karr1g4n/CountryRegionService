@@ -1,8 +1,7 @@
-package com.example.firstspring.service;
+package pragmatTech.CountryRegionService.service;
 
-import com.example.firstspring.feign.CountryRegionClient;
-import com.example.firstspring.feign.GeoNameClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import pragmatTech.CountryRegionService.feign.CountryRegionClient;
+import pragmatTech.CountryRegionService.feign.GeoNameClient;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +11,6 @@ public class CountyRegionFeignService {
     private CountryRegionService countryRegionService;
 
 
-    @Autowired
     public CountyRegionFeignService(CountryRegionClient countryRegionClient, CountryRegionService countryRegionService, GeoNameClient geoNameClient){
         this.countryRegionClient=countryRegionClient;
         this.countryRegionService=countryRegionService;

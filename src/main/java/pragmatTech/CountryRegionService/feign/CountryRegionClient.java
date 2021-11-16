@@ -1,5 +1,4 @@
-package com.example.firstspring.feign;
-
+package pragmatTech.CountryRegionService.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

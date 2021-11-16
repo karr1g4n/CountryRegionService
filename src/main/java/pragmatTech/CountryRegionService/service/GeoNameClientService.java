@@ -1,0 +1,41 @@
+package pragmatTech.CountryRegionService.service;
+
+import pragmatTech.CountryRegionService.feign.GeoNameClient;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class GeoNameClientService {
+
+    private GeoNameClient geoNameClient;
+    private List<String> countryNames = new ArrayList<>();
+
+    @Autowired
+    public GeoNameClientService(GeoNameClient geoNameClient) {
+        this.geoNameClient = geoNameClient;
+    }
+
+    public List<String> getAllCountries() throws IOException {
+        StringReader stringReader = new StringReader(geoNameClient.getAllCountryInfo());
+        Iterable<CSVRecord> names = CSVFormat.RFC4180.withDelimiter('\t').parse(stringReader);
+
+        for (CSVRecord name : names) {
+            String countryName = "";
+            if (name.size() > 4 && !"#".equals(name.get(0))) {
+
+                countryName = name.get(4);
+            }
+            if (!countryName.isEmpty()) {
+                countryNames.add(countryName);
+            }
+        }
+        return countryNames;
+    }
+}
