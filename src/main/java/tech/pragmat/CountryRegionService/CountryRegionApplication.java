@@ -1,14 +1,15 @@
-package com.example.firstspring;
+package tech.pragmat.CountryRegionService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-
 @SpringBootApplication
 @EnableFeignClients
-public class FirstSpringApplication {
+
+public class CountryRegionApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(FirstSpringApplication.class, args);
+        SpringApplication.run(CountryRegionApplication.class, args);
     }
 }
