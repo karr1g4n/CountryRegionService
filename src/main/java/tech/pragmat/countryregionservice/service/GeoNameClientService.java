@@ -1,9 +1,9 @@
-package tech.pragmat.CountryRegionService.service;
+package tech.pragmat.countryregionservice.service;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
-import tech.pragmat.CountryRegionService.feign.GeoNameClient;
+import tech.pragmat.countryregionservice.feign.GeoNameClient;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -13,14 +13,14 @@ import java.util.List;
 @Service
 public class GeoNameClientService {
 
-    private GeoNameClient geoNameClient;
-    private List<String> countryNames = new ArrayList<>();
+    private final GeoNameClient geoNameClient;
 
     public GeoNameClientService(GeoNameClient geoNameClient) {
         this.geoNameClient = geoNameClient;
     }
 
     public List<String> getAllCountries() throws IOException {
+        List<String> countryNames = new ArrayList<>();
         StringReader stringReader = new StringReader(geoNameClient.getAllCountryInfo());
         Iterable<CSVRecord> names = CSVFormat.RFC4180.withDelimiter('\t').parse(stringReader);
 

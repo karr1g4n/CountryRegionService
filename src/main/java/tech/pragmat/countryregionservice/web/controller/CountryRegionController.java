@@ -1,4 +1,4 @@
-package tech.pragmat.CountryRegionService.web.controller;
+package tech.pragmat.countryregionservice.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tech.pragmat.CountryRegionService.model.entity.CountryRegion;
-import tech.pragmat.CountryRegionService.service.CountryRegionService;
+import tech.pragmat.countryregionservice.model.CountryRegion;
+import tech.pragmat.countryregionservice.service.CountryRegionService;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +22,7 @@ public class CountryRegionController {
 
     private final CountryRegionService countryRegionService;
 
-    private CountryRegionController(CountryRegionService countryRegionService) {
+    public CountryRegionController(CountryRegionService countryRegionService) {
         this.countryRegionService = countryRegionService;
     }
 
@@ -39,7 +39,7 @@ public class CountryRegionController {
     }
 
     @PostMapping("/addAll")
-    private void addAllCountryRegion() throws IOException {
+    public void addAllCountryRegion() throws IOException {
         log.info("User try add all country and region in DB");
         countryRegionService.addAllCountry();
     }
@@ -57,9 +57,9 @@ public class CountryRegionController {
     }
 
     @DeleteMapping()
-    public void delCountryByName(@RequestParam String name) {
+    public CountryRegion delCountryByName(@RequestParam String name) {
         log.info("request to delete country and region by name of country");
-        countryRegionService.deleteCountryRegionByName(name);
+        return countryRegionService.deleteCountryRegionByName(name);
     }
 
 }

@@ -1,8 +1,8 @@
-package tech.pragmat.CountryRegionService.service;
+package tech.pragmat.countryregionservice.service;
 
 import org.springframework.stereotype.Service;
-import tech.pragmat.CountryRegionService.model.entity.CountryRegion;
-import tech.pragmat.CountryRegionService.repository.CountryRegionRepository;
+import tech.pragmat.countryregionservice.model.CountryRegion;
+import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,9 +12,9 @@ public class CountryRegionService {
 
     private final CountryRegionRepository countryRegionRepository;
 
-    private GeoNameClientService geoNameClientService;
+    private final GeoNameClientService geoNameClientService;
 
-    private CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
         this.countryRegionRepository = countryRegionRepository;
         this.geoNameClientService = geoNameClientService;
     }
@@ -24,10 +24,11 @@ public class CountryRegionService {
     }
 
     public void addAllCountry() throws IOException {
+
         List<String> countriesName = geoNameClientService.getAllCountries();
-        for (int i = 0; i < countriesName.size(); i++) {
-            if (countryRegionRepository.findFirstByCountry(countriesName.get(i)) == null) {
-                countryRegionRepository.save(new CountryRegion(countriesName.get(i), "world"));
+        for (String s : countriesName) {
+            if (countryRegionRepository.findFirstByCountry(s) == null) {
+                countryRegionRepository.save(new CountryRegion(s, "world"));
             }
         }
     }
@@ -43,7 +44,7 @@ public class CountryRegionService {
     }
 
     public List<CountryRegion> getAllCountryRegion() {
-        return countryRegionRepository.findAll();
+        return (List<CountryRegion>) countryRegionRepository.findAll();
     }
 
     public CountryRegion getCountryRegionByName(String name) {
