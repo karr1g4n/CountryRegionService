@@ -1,5 +1,6 @@
 package tech.pragmat.countryregionservice.web.controller;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,8 @@ public class CountryRegionController {
 
     private final CountryRegionService countryRegionService;
 
-    private CountryRegionController(CountryRegionService countryRegionService) {
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
+    public CountryRegionController(CountryRegionService countryRegionService) {
         this.countryRegionService = countryRegionService;
     }
 
@@ -57,9 +59,9 @@ public class CountryRegionController {
     }
 
     @DeleteMapping()
-    public void delCountryByName(@RequestParam String name) {
+    public CountryRegion delCountryByName(@RequestParam String name) {
         log.info("request to delete country and region by name of country");
-        countryRegionService.deleteCountryRegionByName(name);
+        return countryRegionService.deleteCountryRegionByName(name);
     }
 
 }

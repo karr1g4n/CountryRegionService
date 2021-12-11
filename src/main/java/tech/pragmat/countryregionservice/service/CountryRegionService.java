@@ -1,5 +1,6 @@
 package tech.pragmat.countryregionservice.service;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.stereotype.Service;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
 import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
@@ -12,9 +13,10 @@ public class CountryRegionService {
 
     private final CountryRegionRepository countryRegionRepository;
 
-    private GeoNameClientService geoNameClientService;
+    private final GeoNameClientService geoNameClientService;
 
-    private CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
         this.countryRegionRepository = countryRegionRepository;
         this.geoNameClientService = geoNameClientService;
     }
@@ -25,9 +27,9 @@ public class CountryRegionService {
 
     public void addAllCountry() throws IOException {
         List<String> countriesName = geoNameClientService.getAllCountries();
-        for (int i = 0; i < countriesName.size(); i++) {
-            if (countryRegionRepository.findFirstByCountry(countriesName.get(i)) == null) {
-                countryRegionRepository.save(new CountryRegion(countriesName.get(i), "world"));
+        for (String s : countriesName) {
+            if (countryRegionRepository.findFirstByCountry(s) == null) {
+                countryRegionRepository.save(new CountryRegion(s, "world"));
             }
         }
     }
