@@ -1,14 +1,14 @@
-package tech.pragmat.CountryRegionService.service;
+package tech.pragmat.countryregionservice.service;
 
 import org.springframework.stereotype.Service;
-import tech.pragmat.CountryRegionService.feign.CountryRegionClient;
-import tech.pragmat.CountryRegionService.feign.GeoNameClient;
+import tech.pragmat.countryregionservice.feign.CountryRegionClient;
+import tech.pragmat.countryregionservice.feign.GeoNameClient;
 
 @Service
 public class CountyRegionFeignService {
 
-    private CountryRegionClient countryRegionClient;
-    private CountryRegionService countryRegionService;
+    private final CountryRegionClient countryRegionClient;
+    private final CountryRegionService countryRegionService;
 
     public CountyRegionFeignService(CountryRegionClient countryRegionClient, CountryRegionService countryRegionService, GeoNameClient geoNameClient) {
         this.countryRegionClient = countryRegionClient;

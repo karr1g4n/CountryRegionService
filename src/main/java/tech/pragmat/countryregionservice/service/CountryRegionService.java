@@ -1,8 +1,8 @@
-package tech.pragmat.CountryRegionService.service;
+package tech.pragmat.countryregionservice.service;
 
 import org.springframework.stereotype.Service;
-import tech.pragmat.CountryRegionService.model.entity.CountryRegion;
-import tech.pragmat.CountryRegionService.repository.CountryRegionRepository;
+import tech.pragmat.countryregionservice.model.entity.CountryRegion;
+import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 
 import java.io.IOException;
 import java.util.List;

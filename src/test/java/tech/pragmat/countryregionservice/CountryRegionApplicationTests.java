@@ -1,4 +1,4 @@
-package tech.pragmat.CountryRegionService;
+package tech.pragmat.countryregionservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

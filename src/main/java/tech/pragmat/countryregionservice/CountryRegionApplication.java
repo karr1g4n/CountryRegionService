@@ -1,4 +1,4 @@
-package tech.pragmat.CountryRegionService;
+package tech.pragmat.countryregionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

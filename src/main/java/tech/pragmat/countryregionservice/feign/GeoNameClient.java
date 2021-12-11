@@ -1,4 +1,4 @@
-package tech.pragmat.CountryRegionService.feign;
+package tech.pragmat.countryregionservice.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

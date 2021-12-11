@@ -1,4 +1,4 @@
-package tech.pragmat.CountryRegionService.web.controller;
+package tech.pragmat.countryregionservice.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import tech.pragmat.CountryRegionService.model.entity.CountryRegion;
-import tech.pragmat.CountryRegionService.service.CountryRegionService;
+import tech.pragmat.countryregionservice.model.entity.CountryRegion;
+import tech.pragmat.countryregionservice.service.CountryRegionService;
 
 import java.io.IOException;
 import java.util.List;
