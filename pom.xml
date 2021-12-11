@@ -83,11 +83,18 @@
             <artifactId>maven-checkstyle-plugin</artifactId>
             <version>3.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.38.0</version>
         </dependency>
 
     </dependencies>
@@ -97,6 +104,26 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.38.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>country-region</name>
+                            <build>
+                                <tags>
+                                    <tag>latest</tag>
+                                </tags>
+                                <dockerFileDir>${project.basedir}</dockerFileDir>
+                            </build>
+                        </image>
+                    </images>
+
+                </configuration>
             </plugin>
 
             <plugin>
