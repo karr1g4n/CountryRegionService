@@ -1,4 +1,4 @@
-package tech.pragmat.countryregionservice.model.entity;
+package tech.pragmat.countryregionservice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

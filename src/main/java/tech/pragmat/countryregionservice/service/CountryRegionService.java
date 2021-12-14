@@ -2,7 +2,7 @@ package tech.pragmat.countryregionservice.service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.stereotype.Service;
-import tech.pragmat.countryregionservice.model.entity.CountryRegion;
+import tech.pragmat.countryregionservice.model.CountryRegion;
 import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 
 import java.io.IOException;
