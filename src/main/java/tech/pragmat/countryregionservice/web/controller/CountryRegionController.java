@@ -41,7 +41,7 @@ public class CountryRegionController {
     }
 
     @PostMapping("/addAll")
-    private void addAllCountryRegion() throws IOException {
+    public void addAllCountryRegion() throws IOException {
         log.info("User try add all country and region in DB");
         countryRegionService.addAllCountry();
     }

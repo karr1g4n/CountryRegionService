@@ -1,7 +1,9 @@
 package tech.pragmat.countryregionservice.service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
 import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 
@@ -15,10 +17,16 @@ public class CountryRegionService {
 
     private final GeoNameClientService geoNameClientService;
 
+    @Value("${cr.url}")
+    String geoLiteURL;
+
+    private final RestTemplate restTemplate;
+
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, RestTemplate restTemplate) {
         this.countryRegionRepository = countryRegionRepository;
         this.geoNameClientService = geoNameClientService;
+        this.restTemplate = restTemplate;
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion) {
@@ -49,7 +57,13 @@ public class CountryRegionService {
     }
 
     public CountryRegion getCountryRegionByName(String name) {
+
         return countryRegionRepository.findFirstByCountry(name);
+    }
+
+    public String getCountryRegion(String ip) {
+        String countryName = restTemplate.getForObject(geoLiteURL + "?ip=" + ip, String.class);
+        return getCountryRegionByName(countryName).getRegion();
     }
 
     public CountryRegion deleteCountryRegionByName(String name) {
