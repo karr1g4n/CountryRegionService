@@ -15,7 +15,7 @@ import tech.pragmat.countryregionservice.service.CountyRegionFeignService;
 public class ConnectionWithGeoLite2CountryController {
 
     @Value("${cr.url}")
-    String a;
+    String geoLiteURL;
 
     private final CountyRegionFeignService countyRegionFeignService;
 
@@ -31,7 +31,7 @@ public class ConnectionWithGeoLite2CountryController {
 
         log.info("try get region by ip");
 //        return countyRegionFeignService.getRegionName(ip);
-        return restTemplate.getForObject(a + ip, String.class);
+        return restTemplate.getForObject(geoLiteURL+"?ip="+ ip, String.class);
 
     }
 }
