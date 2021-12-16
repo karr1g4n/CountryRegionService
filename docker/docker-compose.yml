@@ -2,6 +2,13 @@ version: '3'
 
 services:
 
+
+  eureka-service:
+    image: "eureka:latest"
+    container_name: eureka-service
+    ports:
+      - 8881:8881
+
   country-region:
     image: 'country-region:latest'
     container_name: country-region
@@ -13,26 +20,18 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=43ahegib
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - CR_URL=http://nginx:4000/Geo2LiteCountry
+      - CR_URL=http://eureka-service:8881/Geo2LiteService/Geo2LiteCountry/getCountryByIp?ip=
       - GEO.URL=https://download.geonames.org/
     ports:
       - 8480:8480
 
   geo-lite:
     image: 'geo-lite:latest'
-#    container_name: geo-lite
-    expose:
-      - 8090
 
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - geo-lite
+    environment:
+      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://eureka-service:8881/eureka/
     ports:
-      - 4000:4000
-
+      - 9090
   db:
     image: 'postgres:13.1-alpine'
     container_name: db
