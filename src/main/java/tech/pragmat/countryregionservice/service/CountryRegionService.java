@@ -2,23 +2,26 @@ package tech.pragmat.countryregionservice.service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
 import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
+import tech.pragmat.countryregionservice.ribbon.RibbonConfiguration;
 
 import java.io.IOException;
 import java.util.List;
 
 @Service
+@RibbonClient(name = "ping-a-server", configuration = RibbonConfiguration.class)
 public class CountryRegionService {
 
     private final CountryRegionRepository countryRegionRepository;
 
     private final GeoNameClientService geoNameClientService;
 
-    @Value("${cr.url}")
-    String geoLiteURL;
+//    @Value("${cr.url}")
+//    String geoLiteURL;
 
     private final RestTemplate restTemplate;
 
@@ -62,7 +65,7 @@ public class CountryRegionService {
     }
 
     public String getCountryRegion(String ip) {
-        String countryName = restTemplate.getForObject(geoLiteURL + "?ip=" + ip, String.class);
+        String countryName = restTemplate.getForObject("http://ping-server/Geo2LiteCountry/getCountryByIp" + "?ip=" + ip, String.class);
         return getCountryRegionByName(countryName).getRegion();
     }
 

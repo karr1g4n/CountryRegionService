@@ -3,11 +3,11 @@ version: '3'
 services:
 
 
-  eureka:
-    image: "eureka:latest"
-    container_name: eureka-service
-    ports:
-      - 8881:8881
+#  eureka:
+#    image: "eureka:latest"
+#    container_name: eureka-service
+#    ports:
+#      - 8881:8881
 
   country-region:
     image: 'country-region:latest'
@@ -21,18 +21,19 @@ services:
       - SPRING_DATASOURCE_PASSWORD=43ahegib
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://eureka:8881/eureka/
-      - CR_URL=http://GEO2LITESERVICE/Geo2LiteCountry/getCountryByIp
+#      - CR_URL=http://GEO2LITESERVICE/Geo2LiteCountry/getCountryByIp
       - GEO.URL=https://download.geonames.org/
     ports:
       - 8480:8480
 
   geo-lite:
+    container_name: geo-lite
     image: 'geo-lite:latest'
 
     environment:
       - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://eureka:8881/eureka/
-    expose:
-      - 5000
+    ports:
+      - 9090:9090
   db:
     image: 'postgres:13.1-alpine'
     container_name: db
