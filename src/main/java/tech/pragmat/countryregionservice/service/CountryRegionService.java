@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-@RibbonClient(name = "ping-a-server", configuration = RibbonConfiguration.class)
+//@RibbonClient(name = "geo-a-lite", configuration = RibbonConfiguration.class)
 public class CountryRegionService {
 
     private final CountryRegionRepository countryRegionRepository;
@@ -23,13 +23,13 @@ public class CountryRegionService {
 //    @Value("${cr.url}")
 //    String geoLiteURL;
 
-    private final RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, RestTemplate restTemplate) {
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
         this.countryRegionRepository = countryRegionRepository;
         this.geoNameClientService = geoNameClientService;
-        this.restTemplate = restTemplate;
+//        this.restTemplate = restTemplate;
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion) {
@@ -65,8 +65,9 @@ public class CountryRegionService {
     }
 
     public String getCountryRegion(String ip) {
-        String countryName = restTemplate.getForObject("http://ping-server/Geo2LiteCountry/getCountryByIp" + "?ip=" + ip, String.class);
-        return getCountryRegionByName(countryName).getRegion();
+//        String countryName = restTemplate.getForObject("http://geo-lite/Geo2LiteCountry/getCountryByIp" + "?ip=" + ip, String.class);
+//        return getCountryRegionByName(countryName).getRegion();
+        return  null;
     }
 
     public CountryRegion deleteCountryRegionByName(String name) {
