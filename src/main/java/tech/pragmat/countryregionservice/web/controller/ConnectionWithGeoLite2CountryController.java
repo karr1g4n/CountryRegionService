@@ -30,7 +30,7 @@ public class ConnectionWithGeoLite2CountryController {
     public String get(@RequestParam String ip) {
 
         log.info("try get region by ip");
-        return restTemplate.getForObject("http://geo-lite/Geo2LiteCountry/getCountryByIp" + "?ip=" + ip, String.class);
+        return restTemplate.getForObject("http://geo-lite/Geo2LiteCountry/getCountryByIp?ip=" + ip, String.class);
 
 //        return countryRegionService.getCountryRegion(ip);
     }
