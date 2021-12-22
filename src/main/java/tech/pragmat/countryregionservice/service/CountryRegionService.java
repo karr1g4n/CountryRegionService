@@ -1,7 +1,6 @@
 package tech.pragmat.countryregionservice.service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,23 +12,20 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-//@RibbonClient(name = "geo-a-lite", configuration = RibbonConfiguration.class)
+@RibbonClient(name = "geo-a-lite", configuration = RibbonConfiguration.class)
 public class CountryRegionService {
 
     private final CountryRegionRepository countryRegionRepository;
 
     private final GeoNameClientService geoNameClientService;
 
-//    @Value("${cr.url}")
-//    String geoLiteURL;
-
-//    private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService) {
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, RestTemplate restTemplate) {
         this.countryRegionRepository = countryRegionRepository;
         this.geoNameClientService = geoNameClientService;
-//        this.restTemplate = restTemplate;
+        this.restTemplate = restTemplate;
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion) {
@@ -65,9 +61,12 @@ public class CountryRegionService {
     }
 
     public String getCountryRegion(String ip) {
-//        String countryName = restTemplate.getForObject("http://geo-lite/Geo2LiteCountry/getCountryByIp" + "?ip=" + ip, String.class);
-//        return getCountryRegionByName(countryName).getRegion();
-        return  null;
+        CountryRegion countryRegion = getCountryRegionByName(restTemplate.getForObject("http://geo-lite/Geo2LiteCountry/getCountryByIp?ip=" + ip, String.class));
+        if (countryRegion != null) {
+            return countryRegion.getRegion();
+        } else {
+            return null;
+        }
     }
 
     public CountryRegion deleteCountryRegionByName(String name) {
