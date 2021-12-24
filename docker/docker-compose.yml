@@ -8,42 +8,34 @@ services:
 #    ports:
 #      - 8881:8881
 
-  country-region:
-    image: 'country-region:latest'
-    container_name: country-region
-    depends_on:
-      - db
-      - geo-lite
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/country_region
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=43ahegib
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-#      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://eureka:8881/eureka/
-#      - CR_URL=http://GEO2LITESERVICE/Geo2LiteCountry/getCountryByIp
-      - GEO.URL=https://download.geonames.org/
-      - GEO-LITE_RIBBON_LISTOFSERVERS=geo-lite:9090,geo-lite1:9090
-    ports:
-      - 8480:8480
+#  country-region:
+#    image: 'country-region:latest'
+#    container_name: country-region
+#    depends_on:
+#      - db
+#      - geo-lite
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/country_region
+#      - SPRING_DATASOURCE_USERNAME=postgres
+#      - SPRING_DATASOURCE_PASSWORD=43ahegib
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+##      - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://eureka:8881/eureka/
+##      - CR_URL=http://GEO2LITESERVICE/Geo2LiteCountry/getCountryByIp
+#      - GEO.URL=https://download.geonames.org/
+#      - GEO-LITE_RIBBON_LISTOFSERVERS=geo-lite:9090
+#    ports:
+#      - 8480:8480
 
   geo-lite:
     image: 'geo-lite:latest'
     ports:
-      - 9091:9090
-
-  geo-lite1:
-    image: 'geo-lite:latest'
-    ports:
-      - 9092:9090
-
-
-
-  db:
-    image: 'postgres:13.1-alpine'
-    container_name: db
-    environment:
-      - POSTGRES_DB=country_region
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=43ahegib
-    ports:
-      - 5432:5432
+      - 9090
+#  db:
+#    image: 'postgres:13.1-alpine'
+#    container_name: db
+#    environment:
+#      - POSTGRES_DB=country_region
+#      - POSTGRES_USER=postgres
+#      - POSTGRES_PASSWORD=43ahegib
+#    ports:
+#      - 5432:5432
