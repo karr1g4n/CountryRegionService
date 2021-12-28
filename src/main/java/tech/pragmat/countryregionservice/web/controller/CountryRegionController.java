@@ -34,10 +34,15 @@ public class CountryRegionController {
         return countryRegionService.addCountryRegion(countryRegion);
     }
 
-    @PutMapping()
+    @PutMapping("/updateCountryRegion")
     public CountryRegion updateCountryRegion(@RequestBody CountryRegion countryRegion) {
         log.info("User try update country and region in DB");
         return countryRegionService.updateCountryRegion(countryRegion);
+    }
+
+    @PutMapping("/updateCountryRegion/access")
+    public CountryRegion updateCountryRegionAccess(@RequestParam String countryName,String accessName){
+        return countryRegionService.updateCountryRegionAccess(countryName,accessName);
     }
 
     @PostMapping("/addAll")
