@@ -1,9 +1,8 @@
 package tech.pragmat.countryregionservice.service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import tech.pragmat.countryregionservice.feign.CountryRegionClient;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
 import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 
@@ -17,16 +16,13 @@ public class CountryRegionService {
 
     private final GeoNameClientService geoNameClientService;
 
-    @Value("${cr.url}")
-    String geoLiteURL;
-
-    private final RestTemplate restTemplate;
+    private final CountryRegionClient countryRegionClient;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, RestTemplate restTemplate) {
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, CountryRegionClient countryRegionClient) {
         this.countryRegionRepository = countryRegionRepository;
         this.geoNameClientService = geoNameClientService;
-        this.restTemplate = restTemplate;
+        this.countryRegionClient = countryRegionClient;
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion) {
@@ -62,7 +58,7 @@ public class CountryRegionService {
     }
 
     public String getCountryRegion(String ip) {
-        String countryName = restTemplate.getForObject(geoLiteURL + "?ip=" + ip, String.class);
+        String countryName=countryRegionClient.getCountryName(ip);
         return getCountryRegionByName(countryName).getRegion();
     }
 
