@@ -40,10 +40,19 @@ public class CountryRegionController {
         return countryRegionService.updateCountryRegion(countryRegion);
     }
 
-    @PutMapping("/updateCountryRegion/access")
-    public CountryRegion updateCountryRegionAccess(@RequestParam String countryName,String accessName){
-        return countryRegionService.updateCountryRegionAccess(countryName,accessName);
+    @PutMapping("/updateCountry/access")
+    public CountryRegion updateCountryAccess(@RequestParam String countryName,String accessName){
+        log.info("try update country access");
+        return countryRegionService.updateCountryAccess(countryName,accessName);
     }
+
+    @PutMapping("/updateRegion/access")
+    public CountryRegion updateRegionAccess(@RequestParam String countryName,String accessName){
+        log.info("try update region access");
+        return countryRegionService.updateRegionAccess(countryName,accessName);
+    }
+
+
 
     @PostMapping("/addAll")
     public void addAllCountryRegion() throws IOException {

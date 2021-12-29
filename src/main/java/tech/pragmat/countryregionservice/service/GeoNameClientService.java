@@ -26,7 +26,7 @@ public class GeoNameClientService {
 
         for (CSVRecord name : names) {
             String countryName = "";
-            if (name.size() > 4 && !"#".equals(name.get(0))) {
+            if (name.size() > 4 && !"#".equals(name.get(0)) && !name.get(4).equals("Country")) {
 
                 countryName = name.get(4);
             }

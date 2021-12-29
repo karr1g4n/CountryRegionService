@@ -1,7 +1,10 @@
 package tech.pragmat.countryregionservice.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Data
 @Entity(name = "country_region")
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class CountryRegion {
 
     @Id
@@ -26,9 +31,7 @@ public class CountryRegion {
     @JoinColumn(name = "country_access_id")
     private CountryRegionAccess countryAccess;
 
-    public CountryRegion(String countyName, String region,CountryRegionAccess countryAccess) {
-        this.country = countyName;
-        this.region = region;
-        this.countryAccess=countryAccess;
-    }
+    @ManyToOne
+    @JoinColumn(name = "region_access_id")
+    private CountryRegionAccess regionAccess;
 }

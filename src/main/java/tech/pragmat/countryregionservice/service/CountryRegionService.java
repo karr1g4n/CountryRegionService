@@ -1,6 +1,7 @@
 package tech.pragmat.countryregionservice.service;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.pragmat.countryregionservice.feign.CountryRegionClient;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
@@ -21,6 +22,12 @@ public class CountryRegionService {
 
     private final CountryRegionAccessService countryRegionAccessService;
 
+    @Value("${access.name}")
+    private String accessName;
+
+    @Value("${default.region.name}")
+    private String defaultRegion;
+
     @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, CountryRegionClient countryRegionClient,
                                 CountryRegionAccessService countryRegionAccessService) {
@@ -31,20 +38,23 @@ public class CountryRegionService {
     }
 
     public CountryRegion addCountryRegion(CountryRegion countryRegion) {
-        CountryRegionAccess countryRegionAccess = countryRegionAccessService.getAccessByName("access");
-        if (countryRegion != null && countryRegionAccess != null) {
-            return countryRegionRepository.save(new CountryRegion(countryRegion.getCountry(), countryRegion.getRegion(), countryRegionAccess));
+        CountryRegionAccess countryAccess = countryRegionAccessService.getAccessByName(accessName);
+        CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
+        if (countryRegion != null && countryAccess != null && regionAccess != null) {
+            return countryRegionRepository.save(new CountryRegion(0, countryRegion.getCountry(), countryRegion.getRegion(), countryAccess, regionAccess));
         } else {
             return null;
         }
     }
 
     public void addAllCountry() throws IOException {
+
         List<String> countriesName = geoNameClientService.getAllCountries();
-        CountryRegionAccess countryRegionAccess = countryRegionAccessService.getAccessByName("access");
+        CountryRegionAccess countryAccess = countryRegionAccessService.getAccessByName(accessName);
+        CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
         for (String s : countriesName) {
-            if (countryRegionRepository.findFirstByCountry(s) == null && countryRegionAccess != null) {
-                countryRegionRepository.save(new CountryRegion(s, "world", countryRegionAccess));
+            if (countryRegionRepository.findFirstByCountry(s) == null && countryAccess != null && regionAccess != null) {
+                countryRegionRepository.save(new CountryRegion(0, s, defaultRegion, countryAccess, regionAccess));
             }
         }
     }
@@ -59,15 +69,26 @@ public class CountryRegionService {
         return null;
     }
 
-    public CountryRegion updateCountryRegionAccess(String countryName, String accessName) {
+    public CountryRegion updateCountryAccess(String countryName, String accessName) {
         CountryRegion countryRegion = countryRegionRepository.findFirstByCountry(countryName);
-        CountryRegionAccess countryRegionAccess = countryRegionAccessService.getAccessByName(accessName);
+        CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
 
-        if (countryRegion != null && countryRegionAccess != null) {
-            countryRegion.setCountryAccess(countryRegionAccess);
+        if (countryRegion != null && regionAccess != null) {
+            countryRegion.setCountryAccess(regionAccess);
             return countryRegionRepository.save(countryRegion);
+        } else {
+            return null;
         }
-        else {
+    }
+
+    public CountryRegion updateRegionAccess(String countryName, String accessName) {
+        CountryRegion countryRegion = countryRegionRepository.findFirstByCountry(countryName);
+        CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
+
+        if (countryRegion != null && regionAccess != null) {
+            countryRegion.setRegionAccess(regionAccess);
+            return countryRegionRepository.save(countryRegion);
+        } else {
             return null;
         }
     }
@@ -83,15 +104,17 @@ public class CountryRegionService {
 
     public String getCountryRegion(String ip) {
         String countryName = countryRegionClient.getCountryName(ip);
-        return getCountryRegionByName(countryName).getRegion();
+        CountryRegion countryRegion = getCountryRegionByName(countryName);
+        if (countryRegion.getCountryAccess().getAccess().equals(accessName) && countryRegion.getRegionAccess().getAccess().equals(accessName)) {
+            return getCountryRegionByName(countryName).getRegion();
+        } else {
+            return "Country " + countryRegion.getCountry() + " is " + countryRegion.getCountryAccess().getAccess() + " Region is " + countryRegion.getRegionAccess().getAccess();
+        }
+
     }
 
     public CountryRegion deleteCountryRegionByName(String name) {
         return countryRegionRepository.deleteByCountry(name);
-    }
-
-    public void deleteCountryRegion(int id) {
-        countryRegionRepository.deleteById(id);
     }
 
 }

@@ -1,5 +1,6 @@
 package tech.pragmat.countryregionservice.web.controller;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ public class CountryRegionAccessController {
 
     private final CountryRegionAccessService countryRegionAccessService;
 
+    @SuppressFBWarnings({ "EI_EXPOSE_REP2" })
     public CountryRegionAccessController(CountryRegionAccessService countryRegionAccessService) {
         this.countryRegionAccessService = countryRegionAccessService;
     }

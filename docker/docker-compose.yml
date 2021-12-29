@@ -21,7 +21,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD=43ahegib
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - EUREKA.CLIENT.SERVICE-URL.DEFAULTZONE=http://eureka:8881/eureka/
-      - CR_name=GEO2LITESERVICE
+      - CR_NAME=GEO2LITESERVICE
+#      - CR_URL=http://geo-lite
       - GEO.URL=https://download.geonames.org/
     ports:
       - 8480:8480
