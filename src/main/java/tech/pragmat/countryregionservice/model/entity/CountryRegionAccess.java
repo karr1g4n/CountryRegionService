@@ -20,9 +20,9 @@ public class CountryRegionAccess {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", insertable = true, unique = true)
+    @Column(unique = true)
     private int id;
 
-    @Column(name = "access", unique = true)
+    @Column(unique = true)
     private String access;
 }
