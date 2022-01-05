@@ -1,9 +1,6 @@
 package tech.pragmat.countryregionservice.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "CountryRegionAccess")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class CountryRegionAccess {
 
     @Id
@@ -25,4 +22,6 @@ public class CountryRegionAccess {
 
     @Column(unique = true)
     private String access;
+
+
 }
