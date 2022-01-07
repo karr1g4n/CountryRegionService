@@ -5,7 +5,7 @@ import java.util.List;
 public interface Dao<Entity,id> {
     public boolean update(Entity entity);
 
-    public boolean deleteById(id id);
+    public boolean deleteByCountry(String name);
 
     public void create(Entity entity);
 
