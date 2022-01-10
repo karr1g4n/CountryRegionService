@@ -23,5 +23,4 @@ public class CountryRegionAccess {
     @Column(unique = true)
     private String access;
 
-
 }
