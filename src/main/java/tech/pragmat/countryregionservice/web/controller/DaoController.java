@@ -1,9 +1,11 @@
 package tech.pragmat.countryregionservice.web.controller;
 
-import org.springframework.web.bind.annotation.*;
-import tech.pragmat.countryregionservice.Dao.DaoImpl.CountryRegionAccessDaoImpl;
-import tech.pragmat.countryregionservice.Dao.DaoImpl.CountryRegionDaoImpl;
-import tech.pragmat.countryregionservice.model.entity.Country;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import tech.pragmat.countryregionservice.dao.impl.CountryRegionAccessDaoImpl;
+import tech.pragmat.countryregionservice.dao.impl.CountryRegionDaoImpl;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
 import tech.pragmat.countryregionservice.model.entity.CountryRegionAccess;
 
@@ -13,11 +15,12 @@ import java.util.List;
 @RequestMapping("/dao")
 public class DaoController {
 
-    private final CountryRegionDaoImpl dao = new CountryRegionDaoImpl();
+    CountryRegionDaoImpl countryRegionDao = new CountryRegionDaoImpl();
+    CountryRegionAccessDaoImpl countryRegionAccessDao = new CountryRegionAccessDaoImpl();
 
     @PostMapping("/access")
-    public void addAccess() {
-        CountryRegionAccessDaoImpl countryRegionAccessDao = new CountryRegionAccessDaoImpl();
+    public void addAccess() throws Exception {
+
         CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
         countryRegionAccessDao.create(countryRegionAccess);
 
@@ -25,17 +28,15 @@ public class DaoController {
 
     @PostMapping("/country")
     public void addCountry() {
-        CountryRegionDaoImpl countryRegionDao = new CountryRegionDaoImpl();
+
         CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
         CountryRegion countryRegion = new CountryRegion(1, "UK", "world", countryRegionAccess, countryRegionAccess);
-
         countryRegionDao.create(countryRegion);
     }
 
-
     @GetMapping()
-    public List<CountryRegion> getAll() {
-        CountryRegionDaoImpl countryRegionDao = new CountryRegionDaoImpl();
+    public List<CountryRegion> getAll() throws Exception {
+
         return countryRegionDao.findAll();
     }
 }
