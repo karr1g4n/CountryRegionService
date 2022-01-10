@@ -1,13 +1,14 @@
 package tech.pragmat.countryregionservice.connection;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
+@Slf4j
 public class ConnectionPool {
 
     private DataSource dataSource;
@@ -22,7 +23,7 @@ public class ConnectionPool {
             basicDataSource.setPassword(dbConfig.getString("db.connection.password"));
             dataSource = basicDataSource;
         } catch (Exception e) {
-            System.out.println("Error connection " + Arrays.toString(e.getStackTrace()));
+            log.error("Error connection " + e);
         }
     }
 
@@ -30,7 +31,7 @@ public class ConnectionPool {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-            System.out.println("Error connection " + Arrays.toString(e.getStackTrace()));
+            log.error("Error connection " + e);
             throw new SQLException();
         }
 

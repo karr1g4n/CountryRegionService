@@ -22,9 +22,6 @@ public class CountryRegionAccessDaoImpl implements Dao<CountryRegionAccess, Inte
     private static final String GET_BY_ID_QUERY = "select * from country_region_access where id = ?";
     private static final String FIND_ALL_QUERY = "select * from country_region_access";
 
-
-
-
     @Override
     public boolean update(CountryRegionAccess countryRegionAccess) {
         PreparedStatement preparedStatement = null;
@@ -58,7 +55,7 @@ public class CountryRegionAccessDaoImpl implements Dao<CountryRegionAccess, Inte
             log.error("Connection failed...");
             log.error(String.valueOf(e));
         } finally {
-           closePreparedStatement(preparedStatement);
+            closePreparedStatement(preparedStatement);
         }
         return false;
     }
@@ -84,7 +81,7 @@ public class CountryRegionAccessDaoImpl implements Dao<CountryRegionAccess, Inte
     @Override
     public List<CountryRegionAccess> findAll() {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+        ResultSet resultSet = null;
         try (Connection connection = connectionPool.getConnection()) {
             List<CountryRegionAccess> countryRegionAccesses = new ArrayList<>();
             log.info("Connection successful");
@@ -107,7 +104,7 @@ public class CountryRegionAccessDaoImpl implements Dao<CountryRegionAccess, Inte
     @Override
     public CountryRegionAccess getById(Integer integer) {
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet=null;
+        ResultSet resultSet = null;
         CountryRegionAccess countryRegionAccess = null;
         try (Connection connection = connectionPool.getConnection()) {
             preparedStatement = connection.prepareStatement(GET_BY_ID_QUERY);
@@ -140,7 +137,7 @@ public class CountryRegionAccessDaoImpl implements Dao<CountryRegionAccess, Inte
         }
     }
 
-    private void closeResultSet(ResultSet resultSet){
+    private void closeResultSet(ResultSet resultSet) {
         if (resultSet != null) {
             try {
                 resultSet.close();

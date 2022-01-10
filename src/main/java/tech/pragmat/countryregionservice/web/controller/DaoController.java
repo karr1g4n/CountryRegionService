@@ -19,7 +19,7 @@ public class DaoController {
     CountryRegionAccessDaoImpl countryRegionAccessDao = new CountryRegionAccessDaoImpl();
 
     @PostMapping("/access")
-    public void addAccess() throws Exception {
+    public void addAccess() {
 
         CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
         countryRegionAccessDao.create(countryRegionAccess);
@@ -35,7 +35,7 @@ public class DaoController {
     }
 
     @GetMapping()
-    public List<CountryRegion> getAll() throws Exception {
+    public List<CountryRegion> getAll() {
 
         return countryRegionDao.findAll();
     }
