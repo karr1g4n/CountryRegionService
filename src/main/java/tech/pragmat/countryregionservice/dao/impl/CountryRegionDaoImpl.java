@@ -27,6 +27,7 @@ public class CountryRegionDaoImpl implements Dao<CountryRegion, Integer> {
     public boolean update(CountryRegion countryRegion) {
         PreparedStatement preparedStatement = null;
         try (Connection connection = connectionPool.getConnection()) {
+            log.info("Connection successful");
             preparedStatement = connection.prepareStatement(UPDATE_QUERY);
             preparedStatement.setString(1, countryRegion.getRegion());
             preparedStatement.setString(2, countryRegion.getCountry());
@@ -44,9 +45,10 @@ public class CountryRegionDaoImpl implements Dao<CountryRegion, Integer> {
     }
 
     @Override
-    public boolean deleteByCountry(String countryName) {
+    public boolean deleteByName(String countryName) {
         PreparedStatement preparedStatement = null;
         try (Connection connection = connectionPool.getConnection()) {
+            log.info("Connection successful");
             preparedStatement = connection.prepareStatement(DELETE_QUERY);
             preparedStatement.setString(1, countryName);
             return preparedStatement.executeUpdate() != 0;

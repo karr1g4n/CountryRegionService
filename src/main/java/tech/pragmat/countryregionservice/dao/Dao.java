@@ -6,7 +6,7 @@ public interface Dao<T, K> {
 
     boolean update(T entity);
 
-    boolean deleteByCountry(String name);
+    boolean deleteByName(String name);
 
     void create(T entity) throws Exception;
 

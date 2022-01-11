@@ -1,5 +1,7 @@
 package tech.pragmat.countryregionservice.web.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import tech.pragmat.countryregionservice.model.entity.CountryRegionAccess;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/dao")
 public class DaoController {
@@ -24,6 +27,11 @@ public class DaoController {
         CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
         countryRegionAccessDao.create(countryRegionAccess);
 
+    }
+
+    @DeleteMapping()
+    public boolean del() {
+        return countryRegionDao.deleteByName("UK");
     }
 
     @PostMapping("/country")
