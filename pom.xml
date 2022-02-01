@@ -107,6 +107,17 @@
             <version>2.9.0</version>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.flywaydb</groupId>-->
+<!--            <artifactId>flyway-core</artifactId>-->
+<!--            <version>8.4.3</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>8.4.3</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -159,11 +170,17 @@
                 <version>2.3</version>
             </plugin>
 
-
             <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
-                <version>4.0.3</version>
+                <version>8.4.3</version>
+                <configuration>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/country_region?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=UTF-8</url>
+<!--                    <baseDir>db/migration</baseDir>-->
+                    <user>postgres</user>
+                    <password>43ahegib</password>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -183,6 +200,7 @@
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>2.3</version>
             </plugin>
+
         </plugins>
 
     </reporting>
