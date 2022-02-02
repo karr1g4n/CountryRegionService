@@ -1,12 +1,12 @@
 create table country_region_access
 (
-    id     integer not null primary key,
+    id     int not null primary key,
     access varchar(255)
 
 );
 create table country_region
 (
-    id                integer not null primary key,
+    id                int not null primary key,
     country           varchar(255),
     region            varchar(255),
     country_access_id integer,
