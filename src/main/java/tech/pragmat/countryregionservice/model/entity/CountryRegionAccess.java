@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class CountryRegionAccess {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
     private int id;
 
