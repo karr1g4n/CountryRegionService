@@ -1,2 +1,0 @@
--- ALTER TABLE country_region
---     ADD some_column VARCHAR(20) NULL;
