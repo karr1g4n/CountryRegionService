@@ -1,33 +1,79 @@
 package tech.pragmat.countryregionservice;
 
-import org.junit.BeforeClass;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import tech.pragmat.countryregionservice.dao.impl.CountryRegionDaoImpl;
+import org.springframework.transaction.annotation.Transactional;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
 import tech.pragmat.countryregionservice.model.entity.CountryRegionAccess;
+import tech.pragmat.countryregionservice.service.CountryRegionService;
+import tech.pragmat.countryregionservice.web.controller.CountryRegionController;
 
 @SpringBootTest
 class CountryRegionApplicationTests {
 
-    private final CountryRegionDaoImpl countryRegionDao = new CountryRegionDaoImpl();
+    @Autowired
+    private CountryRegionController countryRegionController;
 
-    @BeforeClass
-    public static void globalSetUp() {
-        System.out.println("Initial setup...");
-        System.out.println("Code executes only once");
+    @Autowired
+    private CountryRegionService countryRegionService;
+
+    private final CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
+
+    private final CountryRegionAccess countryRegionBlocked = new CountryRegionAccess(1, "blocked");
+
+    @Test
+    @Transactional
+    public void TestAddCountryRegion() {
+        CountryRegion countryRegion = new CountryRegion(253, "A", "world", countryRegionAccess, countryRegionAccess);
+        countryRegionService.addCountryRegion(countryRegion);
+        Assert.assertEquals(countryRegion.getCountry(), countryRegionService.getCountryRegionByName("A").getCountry());
     }
 
     @Test
-    public void DBContainsCountryRegion() {
-        CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "assert");
+    @Transactional
+    public void TestUpdateCountryRegion() {
+        CountryRegion countryRegion = countryRegionService.getCountryRegionByName("Andorra");
+        countryRegion.setRegion("UA");
+        countryRegionController.updateCountryRegion(countryRegion);
+
+        Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
+    }
+
+    @Test
+    @Transactional
+    public void TestUpdateCountryAccess() {
+        CountryRegion countryRegion = countryRegionService.getCountryRegionByName("Andorra");
+        countryRegion.setCountryAccess(countryRegionBlocked);
+        countryRegionController.updateCountryAccess("Andorra", "blocked");
+        Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
+    }
+
+    @Test
+    @Transactional
+    public void TestUpdateRegionAccess() {
+        CountryRegion countryRegion = countryRegionService.getCountryRegionByName("Andorra");
+        countryRegion.setRegionAccess(countryRegionBlocked);
+        countryRegionController.updateRegionAccess("Andorra", "blocked");
+        Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
+    }
+
+    @Test
+    @Transactional
+    public void TestGetByName() {
         CountryRegion countryRegion = new CountryRegion(1, "Andorra", "world", countryRegionAccess, countryRegionAccess);
 
-        CountryRegion countryRegion1 = countryRegionDao.getById(1);
+        Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
+    }
 
-
-        System.out.println(countryRegion1.toString());
-        Assertions.assertEquals(countryRegion, countryRegionDao.getById(1));
+    @Test
+    @Transactional
+    public void TestDeleteByName() {
+        CountryRegion countryRegion = new CountryRegion(1, "Andorra", "world", countryRegionAccess, countryRegionAccess);
+        countryRegionController.delCountryByName("Andorra");
+//        System.out.println(countryRegionService.getCountryRegionByName("Andorra"));
+        //        Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
     }
 }

@@ -75,7 +75,7 @@ public class CountryRegionController {
         log.info("request to delete country and region by name of country");
         return countryRegionService.deleteCountryRegionByName(name);
     }
-
 }
+
 
 

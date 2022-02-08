@@ -30,5 +30,4 @@ public class CountryRegion {
 
     @ManyToOne
     private CountryRegionAccess regionAccess;
-
 }
