@@ -2,6 +2,8 @@ package tech.pragmat.countryregionservice.web.controller;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.pragmat.countryregionservice.model.entity.CountryRegion;
+import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 import tech.pragmat.countryregionservice.service.CountryRegionService;
 
 import java.io.IOException;
@@ -22,6 +25,9 @@ import java.util.List;
 public class CountryRegionController {
 
     private final CountryRegionService countryRegionService;
+
+    @Autowired
+    private CountryRegionRepository countryRegionRepository;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
     public CountryRegionController(CountryRegionService countryRegionService) {
@@ -71,9 +77,10 @@ public class CountryRegionController {
     }
 
     @DeleteMapping()
-    public CountryRegion delCountryByName(@RequestParam String name) {
+    @Transactional
+    public void delCountryByName(@RequestParam String name) {
         log.info("request to delete country and region by name of country");
-        return countryRegionService.deleteCountryRegionByName(name);
+        countryRegionRepository.deleteCountryRegionByCountry(name);
     }
 }
 

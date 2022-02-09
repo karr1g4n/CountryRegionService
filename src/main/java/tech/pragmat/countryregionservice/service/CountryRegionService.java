@@ -9,7 +9,6 @@ import tech.pragmat.countryregionservice.model.entity.CountryRegionAccess;
 import tech.pragmat.countryregionservice.repository.CountryRegionRepository;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -54,14 +53,14 @@ public class CountryRegionService {
         CountryRegionAccess countryAccess = countryRegionAccessService.getAccessByName(accessName);
         CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
         for (String s : countriesName) {
-            if (countryRegionRepository.findFirstByCountry(s) == null && countryAccess != null && regionAccess != null) {
+            if (countryRegionRepository.findByCountry(s) == null && countryAccess != null && regionAccess != null) {
                 countryRegionRepository.save(new CountryRegion(0, s, defaultRegion, countryAccess, regionAccess));
             }
         }
     }
 
     public CountryRegion updateCountryRegion(CountryRegion countryRegion) {
-        CountryRegion countryRegionExisting = countryRegionRepository.findFirstByCountry(countryRegion.getCountry());
+        CountryRegion countryRegionExisting = countryRegionRepository.findByCountry(countryRegion.getCountry());
         if (countryRegionExisting != null) {
             countryRegionExisting.setRegion(countryRegionExisting.getRegion());
             countryRegionRepository.save(countryRegionExisting);
@@ -71,7 +70,7 @@ public class CountryRegionService {
     }
 
     public CountryRegion updateCountryAccess(String countryName, String accessName) {
-        CountryRegion countryRegion = countryRegionRepository.findFirstByCountry(countryName);
+        CountryRegion countryRegion = countryRegionRepository.findByCountry(countryName);
         CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
 
         if (countryRegion != null && regionAccess != null) {
@@ -83,7 +82,7 @@ public class CountryRegionService {
     }
 
     public CountryRegion updateRegionAccess(String countryName, String accessName) {
-        CountryRegion countryRegion = countryRegionRepository.findFirstByCountry(countryName);
+        CountryRegion countryRegion = countryRegionRepository.findByCountry(countryName);
         CountryRegionAccess regionAccess = countryRegionAccessService.getAccessByName(accessName);
 
         if (countryRegion != null && regionAccess != null) {
@@ -100,7 +99,7 @@ public class CountryRegionService {
 
     public CountryRegion getCountryRegionByName(String name) {
 
-        return countryRegionRepository.findFirstByCountry(name);
+        return countryRegionRepository.findByCountry(name);
     }
 
     public String getCountryRegion(String ip) {
@@ -114,8 +113,8 @@ public class CountryRegionService {
 
     }
 
-    public CountryRegion deleteCountryRegionByName(String name) {
-        return countryRegionRepository.deleteByCountry(name);
+    public void deleteCountryRegionByName(String name) {
+         countryRegionRepository.deleteFirstCountryRegionByCountry(name);
     }
 
 }

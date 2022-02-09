@@ -34,13 +34,13 @@ public class DaoController {
         return countryRegionDao.deleteByName("UK");
     }
 
-    @PostMapping("/country")
-    public void addCountry() {
-
-        CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
-        CountryRegion countryRegion = new CountryRegion(1, "UK", "world", countryRegionAccess, countryRegionAccess);
-        countryRegionDao.create(countryRegion);
-    }
+//    @PostMapping("/country")
+//    public void addCountry() {
+//
+//        CountryRegionAccess countryRegionAccess = new CountryRegionAccess(1, "access");
+//        CountryRegion countryRegion = new CountryRegion(1, "UK", "world", countryRegionAccess, countryRegionAccess);
+//        countryRegionDao.create(countryRegion);
+//    }
 
     @GetMapping()
     public List<CountryRegion> getAll() {
