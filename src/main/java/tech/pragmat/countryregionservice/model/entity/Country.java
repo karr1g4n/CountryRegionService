@@ -12,10 +12,7 @@ import java.util.Objects;
 
 @SuppressFBWarnings("EI_EXPOSE_REP")
 @Entity
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Country {
