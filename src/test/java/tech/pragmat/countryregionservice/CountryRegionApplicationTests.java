@@ -38,8 +38,8 @@ class CountryRegionApplicationTests {
     @Transactional
     public void TestAddCountryRegion() {
         CountryRegion countryRegion = new CountryRegion(253, "A", "world", countryRegionAccess, countryRegionAccess);
-        countryRegionService.addCountryRegion(countryRegion);
-        Assert.assertEquals(countryRegion.getCountry(), countryRegionService.getCountryRegionByName("A").getCountry());
+        countryRegionController.addCountryRegion(countryRegion);
+        Assertions.assertEquals(countryRegion.getCountry(), countryRegionService.getCountryRegionByName("A").getCountry());
     }
 
     @Test
@@ -48,7 +48,6 @@ class CountryRegionApplicationTests {
         CountryRegion countryRegion = countryRegionService.getCountryRegionByName("Andorra");
         countryRegion.setRegion("UA");
         countryRegionController.updateCountryRegion(countryRegion);
-
         Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
     }
 
@@ -74,7 +73,6 @@ class CountryRegionApplicationTests {
     @Transactional
     public void TestGetByName() {
         CountryRegion countryRegion = new CountryRegion(1, "Andorra", "world", countryRegionAccess, countryRegionAccess);
-
         Assertions.assertEquals(countryRegion, countryRegionService.getCountryRegionByName("Andorra"));
     }
 
@@ -86,10 +84,10 @@ class CountryRegionApplicationTests {
     }
 
     @Test
-    public void Test() {
+    public void getCountryByIp() {
         ConnectionWithGeoLite2CountryController mockConnection = mock(ConnectionWithGeoLite2CountryController.class);
         when(mockConnection.get("103.13.64.0")).thenReturn("Afghanistan");
-        Assert.assertEquals(mockConnection.get("103.13.64.1"), "Afghanistan");
+        Assertions.assertEquals(mockConnection.get("103.13.64.0"), countryRegionService.getCountryRegionByName("Afghanistan").getCountry());
     }
 
 }
