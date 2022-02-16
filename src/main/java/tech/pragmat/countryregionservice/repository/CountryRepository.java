@@ -5,5 +5,10 @@ import org.springframework.stereotype.Repository;
 import tech.pragmat.countryregionservice.model.entity.Country;
 
 @Repository
-public interface CountryRepository extends JpaRepository<Country,Integer> {
+public interface CountryRepository extends JpaRepository<Country, Integer> {
+
+    Country findByCountry(String name);
+
+    void deleteCountryByCountry(String name);
+
 }
