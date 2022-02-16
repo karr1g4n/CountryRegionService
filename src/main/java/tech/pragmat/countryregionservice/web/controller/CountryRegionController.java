@@ -46,18 +46,6 @@ public class CountryRegionController {
         return countryRegionService.updateCountryRegion(countryRegion);
     }
 
-    @PutMapping("/updateCountry/access")
-    public CountryRegion updateCountryAccess(@RequestParam String countryName, String accessName) {
-        log.info("try update country access");
-        return countryRegionService.updateCountryAccess(countryName, accessName);
-    }
-
-    @PutMapping("/updateRegion/access")
-    public CountryRegion updateRegionAccess(@RequestParam String countryName, String accessName) {
-        log.info("try update region access");
-        return countryRegionService.updateRegionAccess(countryName, accessName);
-    }
-
     @PostMapping("/addAll")
     public void addAllCountryRegion() throws IOException {
         log.info("User try add all country and region in DB");

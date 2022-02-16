@@ -24,10 +24,4 @@ public class CountryRegion {
     private String country;
 
     private String region;
-
-    @ManyToOne
-    private CountryRegionAccess countryAccess;
-
-    @ManyToOne
-    private CountryRegionAccess regionAccess;
 }
