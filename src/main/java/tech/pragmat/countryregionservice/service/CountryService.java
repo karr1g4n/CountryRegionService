@@ -13,11 +13,11 @@ public class CountryService {
 
     private final CountryRepository countryRepository;
 
-    private final GeoNameClientService geoNameClientService;
+    private final CountryNameClientService countryNameClientService;
 
-    public CountryService(CountryRepository countryRepository, GeoNameClientService geoNameClientService) {
+    public CountryService(CountryRepository countryRepository, CountryNameClientService countryNameClientService) {
         this.countryRepository = countryRepository;
-        this.geoNameClientService = geoNameClientService;
+        this.countryNameClientService = countryNameClientService;
     }
 
     public Country addCountry(String name) {
@@ -30,7 +30,7 @@ public class CountryService {
 
     public void addAllCountry() {
         try {
-            List<String> countriesName = geoNameClientService.getAllCountries();
+            List<String> countriesName = countryNameClientService.getAllCountries();
 
             for (String s : countriesName) {
                 if (countryRepository.findByCountry(s) == null) {

@@ -15,7 +15,7 @@ public class CountryRegionService {
 
     private final CountryRegionRepository countryRegionRepository;
 
-    private final GeoNameClientService geoNameClientService;
+    private final CountryNameClientService countryNameClientService;
 
     private final CountryRegionClient countryRegionClient;
 
@@ -23,9 +23,9 @@ public class CountryRegionService {
     private String defaultRegion;
 
     @SuppressFBWarnings("EI_EXPOSE_REP2")
-    public CountryRegionService(CountryRegionRepository countryRegionRepository, GeoNameClientService geoNameClientService, CountryRegionClient countryRegionClient) {
+    public CountryRegionService(CountryRegionRepository countryRegionRepository, CountryNameClientService countryNameClientService, CountryRegionClient countryRegionClient) {
         this.countryRegionRepository = countryRegionRepository;
-        this.geoNameClientService = geoNameClientService;
+        this.countryNameClientService = countryNameClientService;
         this.countryRegionClient = countryRegionClient;
     }
 
@@ -40,7 +40,7 @@ public class CountryRegionService {
 
     public void addAllCountry() throws IOException {
 
-        List<String> countriesName = geoNameClientService.getAllCountries();
+        List<String> countriesName = countryNameClientService.getAllCountries();
 
         for (String s : countriesName) {
             if (countryRegionRepository.findByCountry(s) == null) {

@@ -13,11 +13,11 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class GeoNameClientService {
+public class CountryNameClientService {
 
     private final GeoNameClient geoNameClient;
 
-    public GeoNameClientService(GeoNameClient geoNameClient) {
+    public CountryNameClientService(GeoNameClient geoNameClient) {
         this.geoNameClient = geoNameClient;
     }
 
