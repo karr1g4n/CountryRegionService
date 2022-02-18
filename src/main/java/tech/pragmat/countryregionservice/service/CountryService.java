@@ -22,7 +22,9 @@ public class CountryService {
 
     public Country addCountry(String name) {
         if (name != null) {
-            return countryRepository.save(new Country(1, name));
+            Country country=new Country();
+            country.setCountry(name);
+            return countryRepository.save(country);
         } else {
             return null;
         }
