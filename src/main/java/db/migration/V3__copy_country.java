@@ -10,7 +10,7 @@ import tech.pragmat.countryregionservice.repository.CountryRepository;
 
 import java.util.List;
 
-public class V4__copy_country extends BaseJavaMigration {
+public class V3__copy_country extends BaseJavaMigration {
 
     @Autowired
     CountryRepository countryRepository;
