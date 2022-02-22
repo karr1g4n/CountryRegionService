@@ -26,8 +26,6 @@ public class CountryServiceTests {
     @Autowired
     private CountryRepository countryRepository;
 
-
-
     private static final String DOCKER_IMAGE = "postgres:13";
     private static final String DB_NAME = "country";
     private static final String USERNAME = "postgres";
@@ -103,7 +101,7 @@ public class CountryServiceTests {
     @Test
     @Transactional
     public void deleteCountryByRightName() {
-        countryService.getCountryByName("Ukraine");
+        countryService.addCountry("Ukraine");
         countryService.deleteCountryByName("Ukraine");
         assertNull(countryService.getCountryByName("Ukraine"));
     }
