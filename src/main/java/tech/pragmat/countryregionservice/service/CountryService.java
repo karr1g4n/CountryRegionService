@@ -21,8 +21,8 @@ public class CountryService {
     }
 
     public Country addCountry(String name) {
-        if (name != null) {
-            Country country=new Country();
+        if (validateCountry(name)) {
+            Country country = new Country();
             country.setCountry(name);
             return countryRepository.save(country);
         } else {
@@ -31,17 +31,15 @@ public class CountryService {
     }
 
     public void addAllCountry() {
-        try {
-            List<String> countriesName = countryNameClientService.getAllCountries();
 
-            for (String s : countriesName) {
-                if (countryRepository.findByCountry(s) == null) {
-                    countryRepository.save(new Country(0, s));
-                }
+        List<String> countriesName = countryNameClientService.getAllCountries();
+
+        for (String s : countriesName) {
+            if (countryRepository.findByCountry(s) == null) {
+                countryRepository.save(new Country(0, s));
             }
-        } catch (Exception e) {
-            log.error(String.valueOf(e));
         }
+
     }
 
     public List<Country> getAllCountry() {
@@ -54,6 +52,18 @@ public class CountryService {
 
     public void deleteCountryByName(String name) {
         countryRepository.deleteCountryByCountry(name);
+    }
+
+    private boolean validateCountry(String name) {
+        if (name != null && name.length() >= 5 && countryRepository.findByCountry(name) == null) {
+            for (int i = 0; i < name.length(); i++) {
+                if (Character.isDigit(name.charAt(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
 }
