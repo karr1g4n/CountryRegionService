@@ -35,7 +35,7 @@ public class RegionService {
         return regionRepository.findByRegion(name);
     }
 
-    public void deleteCountryByName(String name) {
+    public void deleteRegionByName(String name) {
         regionRepository.deleteRegionByRegion(name);
     }
 
