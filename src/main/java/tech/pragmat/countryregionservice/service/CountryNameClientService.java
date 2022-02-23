@@ -3,14 +3,14 @@ package tech.pragmat.countryregionservice.service;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import tech.pragmat.countryregionservice.feign.GeoNameClient;
 
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 @Slf4j
 public class CountryNameClientService {
 

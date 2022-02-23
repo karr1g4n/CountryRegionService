@@ -13,4 +13,7 @@ public class NewCountryRegionService {
     public NewCountryRegionService(NewCountryRegionRepository newCountryRegionRepository) {
         this.newCountryRegionRepository = newCountryRegionRepository;
     }
+
+
+
 }
