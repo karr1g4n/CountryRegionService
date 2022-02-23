@@ -1,7 +1,7 @@
 package tech.pragmat.countryregionservice.web.controller;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +19,7 @@ public class RegionController {
 
     private final RegionService regionService;
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     @Autowired
     public RegionController(RegionService regionService) {
         this.regionService = regionService;
