@@ -8,6 +8,4 @@ import tech.pragmat.countryregionservice.model.entity.Region;
 public interface RegionRepository extends JpaRepository<Region, Integer> {
 
     Region findByRegion(String name);
-
-    void deleteRegionByRegion(String name);
 }
