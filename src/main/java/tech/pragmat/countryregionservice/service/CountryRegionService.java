@@ -59,7 +59,6 @@ public class CountryRegionService {
         return null;
     }
 
-
     public List<CountryRegion> getAllCountryRegion() {
         return countryRegionRepository.findAll();
     }

@@ -39,12 +39,12 @@ public class CountryController {
     }
 
     @GetMapping
-    public Country getCountryByName (@RequestParam String name){
+    public Country getCountryByName(@RequestParam String name) {
         return countryService.getCountryByName(name);
     }
 
     @DeleteMapping
-    public void deleteCountryByName(@RequestParam String name){
+    public void deleteCountryByName(@RequestParam String name) {
         countryService.deleteCountryByName(name);
     }
 

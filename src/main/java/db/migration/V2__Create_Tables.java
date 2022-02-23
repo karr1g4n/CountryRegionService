@@ -13,8 +13,8 @@ public class V2__Create_Tables extends BaseJavaMigration {
                         + "country varchar (255) UNIQUE) ");
 
         new JdbcTemplate(new SingleConnectionDataSource(context.getConnection(), true))
-                .execute("create table  region(id serial PRIMARY KEY UNIQUE  ," +
-                        "region varchar(255) UNIQUE)");
+                .execute("create table  region(id serial PRIMARY KEY UNIQUE  ,"
+                        + "region varchar(255) UNIQUE)");
 
         new JdbcTemplate(new SingleConnectionDataSource(context.getConnection(), true))
                 .execute("create table  new_country_region(id serial PRIMARY KEY UNIQUE,"

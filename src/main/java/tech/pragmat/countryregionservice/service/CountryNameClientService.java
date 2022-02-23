@@ -6,7 +6,6 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
 import tech.pragmat.countryregionservice.feign.GeoNameClient;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class CountryNameClientService {
         this.geoNameClient = geoNameClient;
     }
 
-    public List<String> getAllCountries(){
+    public List<String> getAllCountries() {
         List<String> countryNames = new ArrayList<>();
         try {
             StringReader stringReader = new StringReader(geoNameClient.getAllCountryInfo());
