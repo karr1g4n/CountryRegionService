@@ -36,7 +36,11 @@ public class RegionService {
     }
 
     public void deleteRegionByName(String name) {
-        regionRepository.deleteRegionByRegion(name);
+        Region region = regionRepository.findByRegion(name);
+        if (region != null) {
+            regionRepository.delete(region);
+        }
+
     }
 
     private boolean validateRegion(String name) {
