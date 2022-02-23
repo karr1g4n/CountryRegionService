@@ -8,7 +8,4 @@ import tech.pragmat.countryregionservice.model.entity.Country;
 public interface CountryRepository extends JpaRepository<Country, Integer> {
 
     Country findByCountry(String name);
-
-    void deleteCountryByCountry(String name);
-
 }
