@@ -2,6 +2,7 @@ package tech.pragmat.countryregionservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.pragmat.countryregionservice.model.entity.Country;
 import tech.pragmat.countryregionservice.model.entity.Region;
 import tech.pragmat.countryregionservice.repository.RegionRepository;
 
@@ -12,9 +13,13 @@ public class RegionService {
 
     private final RegionRepository regionRepository;
 
+
+    private final RegionNameClientService regionNameClientService;
+
     @Autowired
-    public RegionService(RegionRepository regionRepository) {
+    public RegionService(RegionRepository regionRepository, RegionNameClientService regionNameClientService) {
         this.regionRepository = regionRepository;
+        this.regionNameClientService = regionNameClientService;
     }
 
     public Region addRegion(String name) {
@@ -24,6 +29,16 @@ public class RegionService {
             return regionRepository.save(region);
         } else {
             return null;
+        }
+    }
+
+    public void addAllRegion() {
+        List<String> regionsName = regionNameClientService.getAllRegions();
+
+        for (String s : regionsName) {
+            if (regionRepository.findByRegion(s) == null) {
+                regionRepository.save(new Region(0, s));
+            }
         }
     }
 
@@ -54,5 +69,4 @@ public class RegionService {
         }
         return false;
     }
-
 }
