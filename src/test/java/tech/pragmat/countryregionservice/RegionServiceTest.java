@@ -98,6 +98,14 @@ public class RegionServiceTest {
         regionService.deleteRegionByName("Восточная Европа");
         assertNull(regionService.getRegionByName("Восточная Европа"));
     }
+
+
+    @Test
+    @Transactional
+    public void addAllRegions() {
+        regionService.addAllRegion();
+    }
+
 }
 
 
