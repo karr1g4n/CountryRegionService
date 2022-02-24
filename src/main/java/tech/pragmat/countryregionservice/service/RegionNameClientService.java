@@ -14,30 +14,29 @@ import java.util.List;
 @Slf4j
 public class RegionNameClientService {
 
-    private    GeoNameClient geoNameClient;
+    private final GeoNameClient geoNameClient;
 
     public RegionNameClientService(GeoNameClient geoNameClient) {
         this.geoNameClient = geoNameClient;
     }
 
-    public  List<String> getAllRegions() {
+    public List<String> getAllRegions() {
         List<String> regionNames = new ArrayList<>();
         try {
             StringReader stringReader = new StringReader(geoNameClient.getAllCountryInfo());
             Iterable<CSVRecord> names = CSVFormat.RFC4180.withDelimiter('\t').parse(stringReader);
 
             for (CSVRecord name : names) {
-                String countryName = "";
+                String regionName = "";
                 if (name.size() > 8 && !"#".equals(name.get(0)) && !name.get(8).equals("Continent")) {
 
-                    countryName = name.get(8);
-                    System.out.println(name.get(8));
+                    regionName = name.get(8);
                 }
-//                if (!countryName.isEmpty()) {
-//                    countryNames.add(countryName);
-//                }
+                if (!regionName.isEmpty() && !regionNames.contains(regionName)) {
+                    regionNames.add(regionName);
+                }
             }
-//            return countryNames;
+            return regionNames;
         } catch (Exception e) {
             log.error(String.valueOf(e));
         }
