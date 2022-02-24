@@ -30,6 +30,11 @@ public class RegionController {
         return regionService.addRegion(region);
     }
 
+    @PostMapping("/add/All/Regions")
+    public void addAllRegion() {
+        regionService.addAllRegion();
+    }
+
     @GetMapping("/get/All/Regions")
     public List<Region> getAllRegion() {
         return regionService.getAllRegion();
