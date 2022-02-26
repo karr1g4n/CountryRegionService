@@ -49,5 +49,4 @@ public class RegionController {
     public void deleteRegionByName(@RequestParam String region) {
         regionService.deleteRegionByName(region);
     }
-
 }
