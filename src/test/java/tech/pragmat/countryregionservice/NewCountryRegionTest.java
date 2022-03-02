@@ -1,8 +1,6 @@
 package tech.pragmat.countryregionservice;
 
-import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -85,7 +83,7 @@ public class NewCountryRegionTest {
         Country country = countryService.addCountry("Ukraine");
         Region region = regionService.addRegion("EU");
         NewCountryRegion newCountryRegion = newCountryRegionService.addNewCountryRegion("Ukraine", "EU");
-        Assertions.assertEquals(newCountryRegion, newCountryRegionService.getNewCountryRegion("Ukraine"));
+        Assertions.assertEquals(newCountryRegion, newCountryRegionService.getNewCountryRegionByName("Ukraine"));
     }
 
     @Test
@@ -95,7 +93,7 @@ public class NewCountryRegionTest {
         Region region = regionService.addRegion("EU");
         NewCountryRegion newCountryRegion = newCountryRegionService.addNewCountryRegion("Ukraine", "EU");
         newCountryRegionService.deleteNewCountryRegion("Ukraine");
-        Assertions.assertNull(newCountryRegionService.getNewCountryRegion("Ukraine"));
+        Assertions.assertNull(newCountryRegionService.getNewCountryRegionByName("Ukraine"));
     }
 
 

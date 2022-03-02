@@ -70,7 +70,7 @@ public class NewCountryRegionService {
         return newCountryRegionRepository.findAll();
     }
 
-    public NewCountryRegion getNewCountryRegion(String name) {
+    public NewCountryRegion getNewCountryRegionByName(String name) {
         Country country = countryRepository.findByCountry(name);
         return newCountryRegionRepository.findByCountry(country);
     }
