@@ -32,6 +32,18 @@ public class NewCountryRegionService {
         this.newCountryRegionRepository = newCountryRegionRepository;
     }
 
+    public NewCountryRegion addNewCountryRegion(String countryName, String regionName) {
+        Country country = countryRepository.findByCountry(countryName);
+        Region region = regionRepository.findByRegion(regionName);
+        if (country != null && region != null) {
+            NewCountryRegion newCountryRegion = new NewCountryRegion();
+            newCountryRegion.setRegion(region);
+            newCountryRegion.setCountry(country);
+            return newCountryRegionRepository.save(newCountryRegion);
+        }
+        return null;
+    }
+
     public void addAll() {
         List<List<String>> countryRegions = newCountryRegionNameClientService.getAllCountries();
         List<Country> countries = new ArrayList<>();
@@ -58,5 +70,14 @@ public class NewCountryRegionService {
         return newCountryRegionRepository.findAll();
     }
 
+    public NewCountryRegion getNewCountryRegion(String name) {
+        Country country = countryRepository.findByCountry(name);
+        return newCountryRegionRepository.findByCountry(country);
+    }
 
+
+    public void deleteNewCountryRegion(String name) {
+        Country country = countryRepository.findByCountry(name);
+        newCountryRegionRepository.deleteByCountry(country);
+    }
 }
