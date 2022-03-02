@@ -51,11 +51,7 @@ public class CountryService {
     }
 
     public void deleteCountryByName(String name) {
-        Country country = countryRepository.findByCountry(name);
-        if (country != null) {
-            countryRepository.delete(country);
-        }
-
+        countryRepository.deleteByCountry(name);
     }
 
     private boolean validateCountry(String name) {

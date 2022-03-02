@@ -51,15 +51,12 @@ public class RegionService {
     }
 
     public void deleteRegionByName(String name) {
-        Region region = regionRepository.findByRegion(name);
-        if (region != null) {
-            regionRepository.delete(region);
-        }
+        regionRepository.deleteByRegion(name);
 
     }
 
     private boolean validateRegion(String name) {
-        if (name != null && name.length() >= 5 && regionRepository.findByRegion(name) == null) {
+        if (name != null && name.length() >= 2 && regionRepository.findByRegion(name) == null) {
             for (int i = 0; i < name.length(); i++) {
                 if (Character.isDigit(name.charAt(i))) {
                     return false;
