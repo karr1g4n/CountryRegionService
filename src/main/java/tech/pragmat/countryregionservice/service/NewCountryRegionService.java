@@ -54,4 +54,9 @@ public class NewCountryRegionService {
 
     }
 
+    public List<NewCountryRegion> getAllNewCountryRegion() {
+        return newCountryRegionRepository.findAll();
+    }
+
+
 }
