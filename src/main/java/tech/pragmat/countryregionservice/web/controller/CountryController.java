@@ -2,6 +2,7 @@ package tech.pragmat.countryregionservice.web.controller;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/country")
-public class CountryController {
+public class  CountryController {
 
     private final CountryService countryService;
 
@@ -46,6 +47,7 @@ public class CountryController {
     }
 
     @DeleteMapping
+    @Transactional
     public void deleteCountryByName(@RequestParam String name) {
         countryService.deleteCountryByName(name);
     }
