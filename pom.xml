@@ -149,6 +149,21 @@
 
     <build>
         <plugins>
+
+
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>1.18.0</version>
+                <configuration>
+                    <releaseRebase>true</releaseRebase>
+                    <gitFlowConfig>
+                        <productionBranch>master</productionBranch>
+                        <versionTagPrefix>v</versionTagPrefix>
+                    </gitFlowConfig>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
